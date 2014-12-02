@@ -1,0 +1,1 @@
+negatif.d: ../negatif.cpp
