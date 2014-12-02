@@ -70,7 +70,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Fps.cpp|2Fps.cpp|FaceRecog.cpp|Copy of Fps.cpp|histogram.cpp|facerecog.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="idendity.cpp|image.cpp|Fps.cpp|2Fps.cpp|FaceRecog.cpp|Copy of Fps.cpp|histogram.cpp|facerecog.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -118,7 +118,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Fps.cpp|2Fps.cpp|FaceRecog.cpp|Copy of Fps.cpp|histogram.cpp|facerecog.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="idendity.cpp|image.cpp|Fps.cpp|2Fps.cpp|FaceRecog.cpp|Copy of Fps.cpp|histogram.cpp|facerecog.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
