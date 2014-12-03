@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../negatif.cpp 
+../adpthreshold.cpp 
 
 OBJS += \
-./negatif.o 
+./adpthreshold.o 
 
 CPP_DEPS += \
-./negatif.d 
+./adpthreshold.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
