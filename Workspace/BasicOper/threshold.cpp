@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
 	threshold(src, dst, 100, 0, 2); // 100den büyük değerleri 100'e yuvarlar. Truncate
 	threshold(src, dst, 70, 0, 3); // 100den küçük değerleri 0'a yuvarlar. Threshold to zero
 	threshold(src, dst, 100, 0, 4); // 100den büyük değerleri 0'a yuvarlar. Threshold to zero inverted
+	threshold(src, dst, 0, 255 , THRESH_OTSU); // 3. parametre önemsiz çünkü otsu algoritması onu hesaplıyor.
 
 	//std::cout << "M = " << std::endl << " " << dst << std::endl << std::endl;
 	namedWindow("mc", CV_WINDOW_AUTOSIZE);
