@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../adpthreshold.cpp 
+../stretch.cpp 
 
 OBJS += \
-./adpthreshold.o 
+./stretch.o 
 
 CPP_DEPS += \
-./adpthreshold.d 
+./stretch.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

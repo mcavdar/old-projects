@@ -1,0 +1,1 @@
+stretch.d: ../stretch.cpp
