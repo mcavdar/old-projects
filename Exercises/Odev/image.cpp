@@ -4,7 +4,7 @@
 #include <time.h>
 using namespace cv;
 
-const int slider_max = 10;
+const int slider_max = 12;
 int slider;
 Mat frame;
 int r;
@@ -110,6 +110,50 @@ void on_trackbar(int, void*) {
 			}
 		}
 
+	}
+
+	if (slider == 10) {
+		// max_value = 255 , min_value = 0 , new_max = 150 , new_min=10
+		if (frame.channels() >= 3) {
+			for (int j = 0; j < frame.cols; ++j) {
+				for (int i = 0; i < frame.rows; ++i) {
+					frame.at<cv::Vec3b>(i, j)[0] =
+							((frame.at<cv::Vec3b>(i, j)[0] * 140) / 255) + 10;
+					frame.at<cv::Vec3b>(i, j)[1] =
+							((frame.at<cv::Vec3b>(i, j)[1] * 140) / 255) + 10;
+					frame.at<cv::Vec3b>(i, j)[2] =
+							((frame.at<cv::Vec3b>(i, j)[2] * 140) / 255) + 10;
+				}
+			}
+		}
+	}
+
+	if (slider == 11) {
+		// max_value = 150 , min_value = 10 , new_max = 255 , new_min=0
+		if (frame.channels() >= 3) {
+			for (int j = 0; j < frame.cols; ++j) {
+				for (int i = 0; i < frame.rows; ++i) {
+					frame.at<cv::Vec3b>(i, j)[0] =
+							((frame.at<cv::Vec3b>(i, j)[0] * 140) / 255) + 10;
+					frame.at<cv::Vec3b>(i, j)[1] =
+							((frame.at<cv::Vec3b>(i, j)[1] * 140) / 255) + 10;
+					frame.at<cv::Vec3b>(i, j)[2] =
+							((frame.at<cv::Vec3b>(i, j)[2] * 140) / 255) + 10;
+				}
+			}
+		}
+		if (frame.channels() >= 3) {
+			for (int j = 0; j < frame.cols; ++j) {
+				for (int i = 0; i < frame.rows; ++i) {
+					frame.at<cv::Vec3b>(i, j)[0] =
+							(((frame.at<cv::Vec3b>(i, j)[0] - 10) * 255) / 140);
+					frame.at<cv::Vec3b>(i, j)[1] =
+							(((frame.at<cv::Vec3b>(i, j)[1] - 10) * 255) / 140);
+					frame.at<cv::Vec3b>(i, j)[2] =
+							(((frame.at<cv::Vec3b>(i, j)[2] - 10) * 255) / 140);
+				}
+			}
+		}
 	}
 
 	imshow("odev", frame);
