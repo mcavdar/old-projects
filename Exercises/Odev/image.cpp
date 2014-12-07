@@ -4,9 +4,10 @@
 #include <time.h>
 using namespace cv;
 
-const int slider_max = 8;
+const int slider_max = 10;
 int slider;
 Mat frame;
+int r;
 char* trackbar_type =
 		"Type: \n 0: Normal \n 1: Negatif \n 2: Threshold \n 3: Otsu(S/B) \n 4: Gaussian(S/B) \n 5: RGB Change";
 
@@ -85,14 +86,98 @@ void on_trackbar(int, void*) {
 	}
 
 	if (slider == 7) {
-		;
+		if (frame.channels() >= 3)
+			cvtColor(frame, frame, CV_BGR2GRAY);
+		equalizeHist(frame, frame);
+	}
+	if (slider == 8) {
+		if (frame.channels() >= 3)
+			cvtColor(frame, frame, CV_BGR2GRAY);
+
+	}
+	if (slider == 9) {
+
+		if (frame.channels() >= 3) {
+			for (int j = 0; j < frame.cols; ++j) {
+				for (int i = 0; i < frame.rows; ++i) {
+					frame.at<cv::Vec3b>(i, j)[0] = frame.at<cv::Vec3b>(i, j)[0]
+							+ r;
+					frame.at<cv::Vec3b>(i, j)[1] = frame.at<cv::Vec3b>(i, j)[1]
+							+ r;
+					frame.at<cv::Vec3b>(i, j)[2] = frame.at<cv::Vec3b>(i, j)[2]
+							+ r;
+				}
+			}
+		}
+
 	}
 
 	imshow("odev", frame);
+
+	vector<Mat> bgr_planes;
+	split(frame, bgr_planes);
+
+	/// Establish the number of bins
+	int histSize = 256;
+
+	/// Set the ranges ( for B,G,R) )
+	float range[] = { 0, 256 };
+	const float* histRange = { range };
+
+	bool uniform = true;
+	bool accumulate = false;
+
+	Mat b_hist, g_hist, r_hist;
+
+	/// Compute the histograms:
+	calcHist(&bgr_planes[0], 1, 0, Mat(), b_hist, 1, &histSize, &histRange,
+			uniform, accumulate);
+	calcHist(&bgr_planes[1], 1, 0, Mat(), g_hist, 1, &histSize, &histRange,
+			uniform, accumulate);
+	calcHist(&bgr_planes[2], 1, 0, Mat(), r_hist, 1, &histSize, &histRange,
+			uniform, accumulate);
+
+	// Draw the histograms for B, G and R
+	int hist_w = 512;
+	int hist_h = 400;
+	int bin_w = cvRound((double) hist_w / histSize);
+
+	Mat histImage(hist_h, hist_w, CV_8UC3, Scalar(0, 0, 0));
+
+	/// Normalize the result to [ 0, histImage.rows ]
+	normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
+	normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
+	normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
+
+	/// Draw for each channel
+	for (int i = 1; i < histSize; i++) {
+		line(histImage,
+				Point(bin_w * (i - 1),
+						hist_h - cvRound(b_hist.at<float>(i - 1))),
+				Point(bin_w * (i), hist_h - cvRound(b_hist.at<float>(i))),
+				Scalar(255, 0, 0), 2, 8, 0);
+		line(histImage,
+				Point(bin_w * (i - 1),
+						hist_h - cvRound(g_hist.at<float>(i - 1))),
+				Point(bin_w * (i), hist_h - cvRound(g_hist.at<float>(i))),
+				Scalar(0, 255, 0), 2, 8, 0);
+		line(histImage,
+				Point(bin_w * (i - 1),
+						hist_h - cvRound(r_hist.at<float>(i - 1))),
+				Point(bin_w * (i), hist_h - cvRound(r_hist.at<float>(i))),
+				Scalar(0, 0, 255), 2, 8, 0);
+	}
+
+	/// Display
+	namedWindow("calcHist Demo", CV_WINDOW_AUTOSIZE);
+	imshow("calcHist Demo", histImage);
+
 }
 
 int main(int argc, char** argv) {
-	slider = 6;
+	slider = 9;
+	srand(time(NULL));
+	r = rand() % 100;
 
 	namedWindow("odev", 1);
 
