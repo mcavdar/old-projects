@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace cv;
-
+// eclipse açıklama
 const int slider_max = 12;
 int slider;
 Mat frame;
