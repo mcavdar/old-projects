@@ -5,4 +5,4 @@ GEOAnnotations.js is a plugin for Video JS player. The aim of this plugin is to 
 ##Demo
 Not complete...
 
-http://mahmutcavdar.com.tr/video5/demo.html
+http://mahmutcavdar.com.tr/video8/demo.html
