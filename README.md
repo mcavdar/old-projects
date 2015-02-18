@@ -12,6 +12,8 @@ https://github.com/Mewte/videojs-logobrand
 ##TODO
  * Read latitude and longitude from file
  * Application for create file when video recording
+ * Lightbox instead of new window for map
+
 
 ##Demo
 Not complete...
