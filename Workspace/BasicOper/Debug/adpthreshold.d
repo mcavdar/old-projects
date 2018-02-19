@@ -1,1 +1,0 @@
-adpthreshold.d: ../adpthreshold.cpp
